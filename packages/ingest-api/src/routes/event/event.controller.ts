@@ -2,7 +2,7 @@ import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { ErrorEventSchema } from '@logtracker/shared';
 import { errorQueue } from '../queue/error.queue'
 
-@Controller()
+@Controller('event')
 export class EventController {
     constructor() {}
 
