@@ -1,7 +1,7 @@
 {
   "name": "@logtracker/shared",
   "version": "1.0.0",
-  "description": "",
+  "private": false,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
