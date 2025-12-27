@@ -1,2 +1,2 @@
-export * from './event'
-export * from './schema'
+export type * from './event'
+export { ErrorEventSchema } from './schema.js'
