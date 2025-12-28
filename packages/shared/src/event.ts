@@ -11,7 +11,6 @@ export interface ErrorContext {
 }
 
 export interface ErrorEvent {
-  id: string
   projectKey: string
   environment: string
   service: string

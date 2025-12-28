@@ -13,11 +13,10 @@ export const ErrorContextSchema = z.object({
 })
 
 export const ErrorEventSchema = z.object({
-  id: z.string(),
   projectKey: z.string(),
   environment: z.string(),
   service: z.string(),
-  timestamp: z.string(),
+  timestamp: z.string().optional(),
   error: ErrorPayloadSchema,
   context: ErrorContextSchema.optional(),
 })
