@@ -36,9 +36,10 @@ Worker / Processor
 PostgreSQL
 ```
 
-Principio clave:
-
-> La API de ingesta no procesa nada. Solo valida y encola.
+- La **Ingest API** valida y encola eventos
+- El **Worker** procesa, agrupa y persiste
+- Redis actúa como **buffer y desacoplador**
+- PostgreSQL almacena el estado final
 
 ---
 
@@ -47,14 +48,28 @@ Principio clave:
 ```
 logtracker/
 ├─ packages/
+│  ├─ core/ # Contrato público (tipos + schemas)
 │  ├─ sdk/            # SDK npm público
 │  ├─ shared/         # Tipos y schemas compartidos
 │  ├─ ingest-api/     # API HTTP de ingesta
 │  └─ worker/         # Worker de procesamiento
+│  └─ admin-api/ # Panel y utilidades administrativas
 ├─ docker-compose.yml
 ├─ commit-convention.md
 └─ README.md
 ```
+
+### Publicables
+
+- `@logtracker/core`
+- `@logtracker/sdk`
+
+### Internos
+
+- `shared`
+- `ingest-api`
+- `worker`
+- `admin-api`
 
 ---
 
@@ -72,10 +87,10 @@ pnpm add @logtracker/sdk
 import { initLogTracker } from '@logtracker/sdk'
 
 initLogTracker({
-  dsn: 'http://localhost:3000',
-  projectId: 'my-app',
-  environment: 'production',
-  service: 'api',
+    dsn: 'http://localhost:3000',
+    projectId: 'my-app',
+    environment: 'production',
+    service: 'api',
 })
 ```
 
@@ -85,9 +100,9 @@ initLogTracker({
 import { captureError } from '@logtracker/sdk'
 
 try {
-  throw new Error('Boom')
+    throw new Error('Boom')
 } catch (err) {
-  captureError(err)
+    captureError(err)
 }
 ```
 
@@ -121,25 +136,29 @@ Esto levanta:
 
 ## 🎯 Objetivos del proyecto
 
-- Aprender microservicios reales
-- Practicar colas y workers
+- Aprender arquitectura de microservicios real
+- Practicar colas, workers y backpressure
 - Diseñar SDKs con buena DX
-- Construir pipelines asíncronos
-- Crear una base SaaS-ready
+- Construir pipelines asíncronos y resilientes
+- Servir como base para un SaaS self-hosted
 
-Es un proyecto educativo y demostrativo, pero construido con estándares reales.
+Es un proyecto educativo y demostrativo, pero construido con criterios reales de producción.
 
 ---
 
 ## 🛣️ Roadmap
 
 - [x] Arquitectura definida
-- [x] Desglose de tareas
-- [ ] Paquete shared
-- [ ] SDK npm
-- [ ] Ingest API
-- [ ] Worker
-- [ ] Persistencia
+- [x] Monorepo y Docker
+- [x] Contrato público (core)
+- [x] SDK npm
+- [x] Ingest API
+- [x] Worker
+- [x] Persistencia
+- [ ] Reintentos y DLQ desde admin
+- [ ] Autenticación y control de acceso
+- [ ] Métricas y alertas
+- [ ] Ejemplos públicos de uso
 
 ---
 
@@ -166,3 +185,10 @@ Antes de empezar:
 ## 📜 Licencia
 
 MIT
+
+## 🏁 Nota final
+
+LogTracker no pretende competir con herramientas comerciales.
+
+Su objetivo es mostrar cómo se construye un sistema real,
+con decisiones técnicas conscientes y trade-offs explícitos.
