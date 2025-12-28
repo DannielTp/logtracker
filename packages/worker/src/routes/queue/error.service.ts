@@ -31,7 +31,7 @@ export class ErrorService {
 
     let group = await groupRepo.findOne({
       where: {
-        project,
+        project: { id: project.id },
         fingerprint,
       },
     })
@@ -56,7 +56,7 @@ export class ErrorService {
       errorGroup: group,
       environment: event.environment,
       service: event.service,
-      timestamp: event.timestamp,
+      timestamp: event.timestamp || new Date().toISOString(),
       payload: event,
     })
 

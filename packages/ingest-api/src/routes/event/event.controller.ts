@@ -12,10 +12,10 @@ export class EventController {
         const parsed = ErrorEventSchema.safeParse(body);
 
         if (!parsed.success) {
-            return;
+            return 'Invalid payload';
         }
 
 		await errorQueue.add('error-event', parsed.data);
-        return;
+        return 'Accepted';
     }
 }
