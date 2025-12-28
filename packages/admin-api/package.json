@@ -1,0 +1,21 @@
+{
+    "name": "@logtracker/admin-api",
+    "private": true,
+    "scripts": {
+        "dev": "ts-node src/main.ts",
+        "build": "tsc",
+        "start": "node dist/main.js"
+    },
+    "dependencies": {
+        "@bull-board/api": "^6.16.1",
+        "@bull-board/express": "^6.16.1",
+        "bullmq": "^5.66.4",
+        "express": "^5.2.1",
+        "@logtracker/shared": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.9.3"
+    }
+}
