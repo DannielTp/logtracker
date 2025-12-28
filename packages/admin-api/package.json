@@ -1,5 +1,6 @@
 {
     "name": "@logtracker/admin-api",
+    "version": "0.1.0",
     "private": true,
     "scripts": {
         "dev": "ts-node src/main.ts",
