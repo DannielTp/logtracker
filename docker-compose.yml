@@ -18,13 +18,12 @@ services:
             - "6379:6379"
 
     ingest-api:
-        build:
-            context: .
-            dockerfile: packages/ingest-api/Dockerfile
+        image: logtracker/ingest-api:0.1.0
         container_name: logtracker-ingest-api
         depends_on:
-            - postgres
             - redis
+            - postgres
+        restart: on-failure
         environment:
             DB_HOST: postgres
             DB_PORT: 5432
@@ -37,13 +36,17 @@ services:
             - "4001:4001"
 
     worker:
-        build:
-            context: .
-            dockerfile: packages/worker/Dockerfile
+        image: logtracker/worker:0.1.0
         container_name: logtracker-worker
         depends_on:
-            - postgres
             - redis
+            - postgres
+        restart: on-failure
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U logtracker"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
         environment:
             DB_HOST: postgres
             DB_PORT: 5432
@@ -54,12 +57,12 @@ services:
             REDIS_PORT: 6379
 
     admin-api:
-        build:
-            context: .
-            dockerfile: packages/admin-api/Dockerfile
+        image: logtracker/admin-api:0.1.0
         container_name: logtracker-admin-api
         depends_on:
             - redis
+            - postgres
+        restart: on-failure
         environment:
             REDIS_HOST: redis
             REDIS_PORT: 6379
