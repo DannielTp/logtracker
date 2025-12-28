@@ -1,6 +1,6 @@
 {
     "name": "@logtracker/ingest-api",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "private": true,
     "scripts": {
         "start": "node dist/main.js",
