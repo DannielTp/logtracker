@@ -15,14 +15,13 @@ export class ErrorService {
     /* ---------- PROJECT ---------- */
 
     let project = await projectRepo.findOne({
-      where: { id: event.projectId },
+      where: { apiKey: event.projectKey },
     })
 
     if (!project) {
       project = await projectRepo.save({
-        id: event.projectId,
-        name: event.projectId,
-        apiKey: event.projectId,
+        name: event.projectKey,
+        apiKey: event.projectKey,
       })
     }
 
