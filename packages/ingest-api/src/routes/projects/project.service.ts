@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { AppDataSource } from '../db/data-source'
+import { AppDataSource } from '../../db/data-source'
 import { Project } from '@logtracker/shared'
 
 @Injectable()

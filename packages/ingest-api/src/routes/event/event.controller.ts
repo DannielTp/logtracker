@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, Post, UseGuards } from '@nestjs/common'
 import { ErrorEventSchema } from '@logtracker/shared'
-import { errorQueue } from '../queue/error.queue'
+import { errorQueue } from '../../queue/error.queue'
 import { ProjectKeyGuard } from 'guards/project-key.guard'
 
 @Controller('event')
