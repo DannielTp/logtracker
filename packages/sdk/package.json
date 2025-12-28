@@ -11,6 +11,6 @@
         "lint": "eslint ."
     },
     "dependencies": {
-        "@logtracker/shared": "workspace:*"
+        "@logtracker/core": "workspace:*"
     }
 }
