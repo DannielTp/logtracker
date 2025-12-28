@@ -1,10 +1,7 @@
 import { Worker } from 'bullmq'
 import { Injectable, OnModuleInit } from '@nestjs/common'
-import {
-    errorDlqQueue,
-    redisConnection,
-    type ErrorEvent,
-} from '@logtracker/shared'
+import { errorDlqQueue, redisConnection } from '@logtracker/shared'
+import type { ErrorEvent } from '@logtracker/core'
 import { ErrorService } from './error.service'
 import { isTransientError } from '../../utils/is-transient-error'
 

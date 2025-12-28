@@ -1,10 +1,6 @@
 import { Injectable } from '@nestjs/common'
-import {
-    ErrorEventEntity,
-    ErrorGroup,
-    Project,
-    type ErrorEvent,
-} from '@logtracker/shared'
+import { ErrorEventEntity, ErrorGroup, Project } from '@logtracker/shared'
+import type { ErrorEvent } from '@logtracker/core'
 import { AppDataSource } from '../db/data-source.js'
 
 @Injectable()
