@@ -11,9 +11,6 @@
     "useDefineForClassFields": false,
 
     "baseUrl": "./src",
-    "paths": {
-      "@logtracker/shared": ["../shared/src"]
-    }
   },
   "include": ["src"]
 }
