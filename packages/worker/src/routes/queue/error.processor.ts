@@ -1,10 +1,12 @@
 import { Worker } from 'bullmq'
 import { Injectable, OnModuleInit } from '@nestjs/common'
-import type { ErrorEvent } from '@logtracker/shared'
+import {
+    errorDlqQueue,
+    redisConnection,
+    type ErrorEvent,
+} from '@logtracker/shared'
 import { ErrorService } from './error.service'
-import { redisConnection } from './redis'
 import { isTransientError } from '../../utils/is-transient-error'
-import { dlqQueue } from './dlq.queue'
 
 @Injectable()
 export class ErrorProcessor implements OnModuleInit {
@@ -29,7 +31,7 @@ export class ErrorProcessor implements OnModuleInit {
                         `❌ Fatal error for job ${job.id}: ${err.message}`,
                     )
 
-                    await dlqQueue.add('error-event-dlq', {
+                    await errorDlqQueue.add('error-event-dlq', {
                         originalJobId: job.id,
                         data: job.data,
                         error: err.message,
