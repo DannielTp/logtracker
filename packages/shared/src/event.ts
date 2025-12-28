@@ -12,7 +12,7 @@ export interface ErrorContext {
 
 export interface ErrorEvent {
   id: string
-  projectId: string
+  projectKey: string
   environment: string
   service: string
   timestamp: string
