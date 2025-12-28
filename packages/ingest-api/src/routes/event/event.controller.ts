@@ -17,7 +17,16 @@ export class EventController {
             return 'Invalid payload'
         }
 
-        await errorQueue.add('error-event', parsed.data)
+        await errorQueue.add('error-event', parsed.data, {
+            attempts: 5,
+            backoff: {
+                type: 'exponential',
+                delay: 1000,
+            },
+            removeOnComplete: true,
+            removeOnFail: false,
+        })
+
         return 'Accepted'
     }
 }
