@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
-import { EventController } from './event.controller';
+import { Module } from '@nestjs/common'
+import { EventController } from './event.controller'
+import { ProjectModule } from 'routes/projects/project.module'
+import { ProjectKeyGuard } from 'guards/project-key.guard'
 
 @Module({
-    imports: [],
+    imports: [ProjectModule],
     controllers: [EventController],
-    providers: [],
+    providers: [ProjectKeyGuard],
 })
 export class EventModule {}
