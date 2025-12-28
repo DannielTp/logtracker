@@ -1,4 +1,3 @@
-import { generateId } from './utils/uuid'
 import { getConfig } from './state'
 import { sendEvent } from './transport'
 import type { ErrorEvent } from '@logtracker/shared'
@@ -17,8 +16,7 @@ export function captureError(
         : new Error(typeof error === 'string' ? error : 'Unknown error')
 
     const event: ErrorEvent = {
-      id: generateId(),
-      projectId: config.projectId,
+      projectKey: config.projectKey,
       environment: config.environment,
       service: config.service,
       timestamp: new Date().toISOString(),

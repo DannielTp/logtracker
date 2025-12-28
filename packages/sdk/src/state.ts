@@ -1,6 +1,6 @@
 export interface LogTrackerConfig {
   dsn: string
-  projectId: string
+  projectKey: string
   environment: string
   service: string
   release?: string
