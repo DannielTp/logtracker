@@ -1,0 +1,30 @@
+# Node
+node_modules
+.pnpm
+.pnpm-store
+**/node_modules
+
+# Build outputs
+dist
+build
+coverage
+
+# Git
+.git
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# IDE
+.vscode
+.idea

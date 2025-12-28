@@ -1,0 +1,72 @@
+services:
+    postgres:
+        image: postgres:16
+        container_name: logtracker-postgres
+        environment:
+            POSTGRES_USER: logtracker
+            POSTGRES_PASSWORD: password
+            POSTGRES_DB: logtracker
+        ports:
+            - "5432:5432"
+        volumes:
+            - postgres_data:/var/lib/postgresql/data
+
+    redis:
+        image: redis:7
+        container_name: logtracker-redis
+        ports:
+            - "6379:6379"
+
+    ingest-api:
+        build:
+            context: .
+            dockerfile: packages/ingest-api/Dockerfile
+        container_name: logtracker-ingest-api
+        depends_on:
+            - postgres
+            - redis
+        environment:
+            DB_HOST: postgres
+            DB_PORT: 5432
+            DB_USER: logtracker
+            DB_PASSWORD: password
+            DB_NAME: logtracker
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+        ports:
+            - "4001:4001"
+
+    worker:
+        build:
+            context: .
+            dockerfile: packages/worker/Dockerfile
+        container_name: logtracker-worker
+        depends_on:
+            - postgres
+            - redis
+        environment:
+            DB_HOST: postgres
+            DB_PORT: 5432
+            DB_USER: logtracker
+            DB_PASSWORD: password
+            DB_NAME: logtracker
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+
+    admin-api:
+        build:
+            context: .
+            dockerfile: packages/admin-api/Dockerfile
+        container_name: logtracker-admin-api
+        depends_on:
+            - redis
+        environment:
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+            ADMIN_USER: admin
+            ADMIN_PASS: admin
+        ports:
+            - "4003:4003"
+
+volumes:
+    postgres_data:
