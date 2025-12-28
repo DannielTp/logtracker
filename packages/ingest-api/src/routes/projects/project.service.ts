@@ -8,4 +8,9 @@ export class ProjectService {
         const repo = AppDataSource.getRepository(Project)
         return (await repo.count({ where: { apiKey } })) > 0
     }
+
+    async findByApiKey(apiKey: string) {
+        const repo = AppDataSource.getRepository(Project)
+        return repo.findOne({ where: { apiKey } })
+    }
 }
