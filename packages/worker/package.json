@@ -1,21 +1,29 @@
 {
-  "name": "@logtracker/worker",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node dist/main.js",
-    "start:dev": "nest start --watch",
-    "build": "nest build"
-  },
-  "dependencies": {
-    "@logtracker/shared": "workspace:*",
-    "@nestjs/common": "^11.0.1",
-    "@nestjs/core": "^11.0.1",
-    "bullmq": "^5.66.4",
-    "dotenv": "^17.2.3",
-    "ioredis": "^5.8.2",
-    "pg": "^8.16.3",
-    "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.28"
-  }
+    "name": "@logtracker/worker",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node dist/main.js",
+        "start:dev": "npx nest start --watch",
+        "build": "npx nest build"
+    },
+    "dependencies": {
+        "@logtracker/shared": "workspace:*",
+        "@nestjs/common": "^11.0.1",
+        "@nestjs/core": "^11.0.1",
+        "bullmq": "^5.66.4",
+        "dotenv": "^17.2.3",
+        "ioredis": "^5.8.2",
+        "pg": "^8.16.3",
+        "reflect-metadata": "^0.2.2",
+        "typeorm": "^0.3.28"
+    },
+    "devDependencies": {
+        "@nestjs/cli": "^11.0.0",
+        "@nestjs/schematics": "^11.0.0",
+        "@nestjs/testing": "^11.0.1",
+        "@types/node": "^22.10.7",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.7.3"
+    }
 }
