@@ -27,6 +27,34 @@ export class ErrorsService {
         }))
     }
 
+    async getGroupDetail(project: any, groupId: string) {
+        const groupRepo = AppDataSource.getRepository(ErrorGroup)
+
+        const group = await groupRepo.findOne({
+            where: { id: groupId },
+            relations: ['project'],
+        })
+
+        if (!group) {
+            throw new NotFoundException('Error group not found')
+        }
+
+        if (group.project.id !== project.id) {
+            throw new ForbiddenException(
+                'Group does not belong to this project',
+            )
+        }
+
+        return {
+            id: group.id,
+            message: group.message,
+            type: group.type,
+            count: group.count,
+            firstSeen: group.firstSeen,
+            lastSeen: group.lastSeen,
+        }
+    }
+
     async listGroupEvents(
         project: any,
         groupId: string,

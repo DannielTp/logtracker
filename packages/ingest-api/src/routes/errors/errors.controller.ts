@@ -12,6 +12,11 @@ export class ErrorsController {
         return this.errorsService.listGroups(req.project)
     }
 
+    @Get('groups/:groupId')
+    async getGroupDetail(@Req() req: any, @Param('groupId') groupId: string) {
+        return this.errorsService.getGroupDetail(req.project, groupId)
+    }
+
     @Get('groups/:groupId/events')
     async listGroupEvents(
         @Req() req: any,
