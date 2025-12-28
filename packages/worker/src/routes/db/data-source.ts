@@ -1,9 +1,7 @@
 import 'reflect-metadata'
 
 import { DataSource } from 'typeorm'
-import { Project } from './entities/project.entity.js'
-import { ErrorEventEntity } from './entities/error-event.entity.js'
-import { ErrorGroup } from './entities/error-group.entity.js'
+import { ErrorEventEntity, ErrorGroup, Project } from '@logtracker/shared'
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common'
-import type { ErrorEvent } from '@logtracker/shared'
+import {
+  ErrorEventEntity,
+  ErrorGroup,
+  Project,
+  type ErrorEvent,
+} from '@logtracker/shared'
 import { AppDataSource } from '../db/data-source.js'
-import { Project } from '../db/entities/project.entity.js'
-import { ErrorGroup } from '../db/entities/error-group.entity.js'
-import { ErrorEventEntity } from '../db/entities/error-event.entity.js'
 
 @Injectable()
 export class ErrorService {
