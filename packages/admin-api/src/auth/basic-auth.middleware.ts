@@ -6,8 +6,6 @@ const PASS = process.env.ADMIN_PASS || 'admin'
 export function basicAuth(req: Request, res: Response, next: NextFunction) {
     const header = req.headers.authorization
 
-    if (!req.path.startsWith('/admin')) return next()
-
     if (!header || !header.startsWith('Basic ')) {
         res.setHeader('WWW-Authenticate', 'Basic')
         return res.status(401).end()

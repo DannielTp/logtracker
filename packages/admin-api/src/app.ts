@@ -7,6 +7,22 @@ import { AppDataSource } from './db/data-source'
 export function createApp(): Express {
     const app = express()
 
+    app.use((req, res, next) => {
+        res.header('Access-Control-Allow-Origin', '*')
+        res.header(
+            'Access-Control-Allow-Methods',
+            'GET,PUT,POST,DELETE,OPTIONS',
+        )
+        res.header(
+            'Access-Control-Allow-Headers',
+            'Content-Type, Authorization, x-project-key',
+        )
+        if (req.method === 'OPTIONS') {
+            return res.sendStatus(200)
+        }
+        next()
+    })
+
     // Parse JSON bodies
     app.use(express.json())
 
