@@ -10,9 +10,12 @@
     "dependencies": {
         "@bull-board/api": "^6.16.1",
         "@bull-board/express": "^6.16.1",
+        "@logtracker/shared": "workspace:*",
         "bullmq": "^5.66.4",
+        "dotenv": "^17.2.3",
         "express": "^5.2.1",
-        "@logtracker/shared": "workspace:*"
+        "reflect-metadata": "^0.2.2",
+        "typeorm": "^0.3.28"
     },
     "devDependencies": {
         "@types/express": "^5.0.6",
