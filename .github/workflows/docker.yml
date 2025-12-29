@@ -10,9 +10,15 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Checkout repo
+            # ---------------------------
+            # Checkout
+            # ---------------------------
+            - name: Checkout repository
               uses: actions/checkout@v4
 
+            # ---------------------------
+            # Docker setup
+            # ---------------------------
             - name: Set up QEMU
               uses: docker/setup-qemu-action@v3
 
@@ -25,48 +31,62 @@ jobs:
                   username: ${{ secrets.DOCKERHUB_USERNAME }}
                   password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-            - name: Extract version (strip v)
-              id: version
+            # ---------------------------
+            # Extract version (strip "v")
+            # ---------------------------
+            - name: Extract version
               run: |
                   TAG="${GITHUB_REF#refs/tags/}"
                   VERSION="${TAG#v}"
                   echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-            # ---------- ingest-api ----------
+            # ===========================
+            # ingest-api
+            # ===========================
             - name: Build & push ingest-api
               uses: docker/build-push-action@v5
               with:
-                  context: ./packages/ingest-api
+                  context: .
+                  file: packages/ingest-api/Dockerfile
                   push: true
                   tags: |
                       logtracker/ingest-api:${{ env.VERSION }}
                       logtracker/ingest-api:latest
 
-            # ---------- worker ----------
+            # ===========================
+            # worker
+            # ===========================
             - name: Build & push worker
               uses: docker/build-push-action@v5
               with:
-                  context: ./packages/worker
+                  context: .
+                  file: packages/worker/Dockerfile
                   push: true
                   tags: |
                       logtracker/worker:${{ env.VERSION }}
                       logtracker/worker:latest
 
-            # ---------- admin-api ----------
+            # ===========================
+            # admin-api
+            # ===========================
             - name: Build & push admin-api
               uses: docker/build-push-action@v5
               with:
-                  context: ./packages/admin-api
+                  context: .
+                  file: packages/admin-api/Dockerfile
                   push: true
                   tags: |
                       logtracker/admin-api:${{ env.VERSION }}
                       logtracker/admin-api:latest
 
-            # ---------- admin-ui ----------
+            # ===========================
+            # admin-ui
+            # ===========================
             - name: Build & push admin-ui
               uses: docker/build-push-action@v5
               with:
-                  context: ./packages/admin-ui
+                  context: .
+                  file: packages/admin-ui/Dockerfile
                   push: true
                   tags: |
                       logtracker/admin-ui:${{ env.VERSION }}
