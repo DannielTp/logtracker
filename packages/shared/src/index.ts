@@ -8,4 +8,4 @@ export { errorQueue } from './queues/error.queue'
 export { ERROR_DLQ_QUEUE_NAME } from './queues/dlq.queue'
 export { errorDlqQueue } from './queues/dlq.queue'
 
-export { redisConnection } from './queues/redis'
+export { createRedisConnection } from './queues/redis'
