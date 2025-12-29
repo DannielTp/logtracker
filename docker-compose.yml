@@ -71,5 +71,14 @@ services:
         ports:
             - "4003:4003"
 
+    admin-ui:
+        image: logtracker/admin-ui:0.1.0
+        container_name: logtracker-admin-ui
+        depends_on:
+            - admin-api
+        restart: on-failure
+        ports:
+            - "3000:80"
+
 volumes:
     postgres_data:

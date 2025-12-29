@@ -1,4 +1,12 @@
-const API_URL = import.meta.env.VITE_ADMIN_API_URL ?? 'http://localhost:4003'
+declare global {
+    interface Window {
+        __ENV__?: {
+            ADMIN_API_URL?: string
+        }
+    }
+}
+
+const API_URL = window.__ENV__?.ADMIN_API_URL ?? 'http://localhost:4003'
 
 export async function api<T>(
     path: string,
