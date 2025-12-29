@@ -12,8 +12,8 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "@logtracker/shared": ["packages/shared/src"],
-      "@logtracker/core": ["packages/core/src"]
+      "@logtracker/shared": ["packages/shared"],
+      "@logtracker/core": ["packages/core"]
     }
   }
 }
