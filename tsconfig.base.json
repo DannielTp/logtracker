@@ -9,6 +9,11 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@logtracker/shared": ["packages/shared/src"],
+      "@logtracker/core": ["packages/core/src"]
+    }
   }
 }
